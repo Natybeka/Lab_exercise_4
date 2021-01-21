@@ -23,7 +23,12 @@ function multiply(numberArray) {
 function divide(number1, number2) {
     var number1 = parseInt(number1);
     var number2 = parseInt(number2);
-    return number1 / number2;
+    if(number2 === 0) {
+        return Infinity;
+    }
+    else {
+        return number1 / number2;
+    }
 }
 
 
