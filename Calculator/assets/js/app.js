@@ -39,7 +39,7 @@ function divide(number1, number2) {
        do {
             var entry = prompt("Enter a number or press x to stop:");
             if (entry != "x"){
-                numberSet.push(parseInt(entry))
+                numberSet.push(parseInt(entry));
             }
        }while(entry != "x");
        console.log("The Sum is: " + add(numberSet));
@@ -54,7 +54,7 @@ function divide(number1, number2) {
         do {
              var entry = prompt("Enter a number or press x to stop:");
             if (entry != "x"){
-                 numberSet.push(parseInt(entry))
+                 numberSet.push(parseInt(entry));
             }
         }while(entry != "x");
         console.log("The Product is: " + multiply(numberSet));
