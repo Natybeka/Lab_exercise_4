@@ -1,5 +1,6 @@
-var BankAccount = function(accountNumber, balance) {
+var BankAccount = function(name, accountNumber, balance) {
     var obj = {};
+    obj.name = name;
     obj.accountNumber = accountNumber;
     obj.balance = parseInt(balance);
 
@@ -18,14 +19,14 @@ var BankAccount = function(accountNumber, balance) {
     return obj;
 }
 
-var account1 = BankAccount("accno1", 10000);
-var account2 = BankAccount("accno2", 40000);
-var account3 = BankAccount("accno3", 60000);
+var account1 = BankAccount("abebe", "accno1", 10000);
+var account2 = BankAccount("kebede", "accno2", 40000);
+var account3 = BankAccount("chala", "accno3", 60000);
 var bank = [account1, account2, account3];
 
-function searchAccount(accountNumber) {
+function searchAccount(name, accountNumber) {
     for(let i = 0; i < bank.length; i++) {
-        if (bank[i].accountNumber === accountNumber){
+        if (bank[i].accountNumber === accountNumber && bank[i].name == name){
             return i;
         }
     }
@@ -35,20 +36,21 @@ function searchAccount(accountNumber) {
 // Starter function
 (function(){
     var accountNumberIndex = -1;
+    var name = prompt("Please enter your Name: ").toLowerCase();
     var accountNo = prompt("Please enter your account Number:");
-   
-    
+      
     do{
-        accountNumberIndex = searchAccount(accountNo);
+        accountNumberIndex = searchAccount(name, accountNo);
         if (accountNumberIndex == -1) {
-            accountNo = prompt("Account number not found, Please enter a valid account number:");
+            name = prompt("Account not found, Please enter a valid name:");
+            accountNo = prompt("Please Enter a valid account number:");
         }
         
     }while(accountNumberIndex == -1);
     
     var choice = "-1";
     do  {
-        choice = prompt("Please enter the operation you want to perform on your account\n1. Deposit into Account\n2. Withdraw an amount\n3. Transfer funds\n4. Check balance\n5. Quit");
+        choice = prompt("Please enter the operation you want to perform on your account\n1. Deposit into Account\n2. Withdraw an Amount\n3. Transfer Funds\n4. Check Balance\n5. Quit");
         if (choice == "1") {
             var amount = prompt("Please Enter the amount to deposit:");
             bank[accountNumberIndex].deposit(amount);
@@ -66,10 +68,14 @@ function searchAccount(accountNumber) {
         }
     
         else if (choice == "3") {
-            var accountTransfer = prompt("Please Enter the account Number to transfer to: ");
-            var accountTransferIndex = searchAccount(accountTransfer);
-            if(accountTransferIndex == -1) {
+            var transferName = prompt("Please Enter the name of the person :").toLowerCase();
+            var accountTransfer = prompt("Please Enter the account Number: ");
+            var accountTransferIndex = searchAccount(transferName, accountTransfer);
+            if (accountTransferIndex == -1) {
                 alert("Account Not Found!");
+            }
+            else if (accountTransferIndex == accountNumberIndex) {
+                alert("Cannot Transfer Funds to yourself!");
             }
             else {
                 var amount = prompt("Please Enter the transfer amount");
@@ -100,4 +106,3 @@ function searchAccount(accountNumber) {
 
     } while(choice != "5");
 })();
-
